@@ -3,8 +3,8 @@
 #include<math.h>
 
 /*R1 interchange with R2 function*/
-int r1_r2(int a[3][3]){
-    int temp[3][3];
+int r1_r2(float a[3][3]){
+    float temp[3][3];
     int i,j,x;
     for(i=0, x=1; i<=1 && x>=0; i++, x--){
 		for(j=0; j<3; j++){
@@ -21,8 +21,8 @@ int r1_r2(int a[3][3]){
 }
 
 /*R1 interchange with R3 function*/
-int r1_r3(int a[3][3]){
-    int temp[3][3];
+int r1_r3(float a[3][3]){
+    float temp[3][3];
     int i,j,x;
     for(i=0, x=2; i<=2 && x>=0; i++, x--){
 		for(j=0; j<3; j++){
@@ -42,8 +42,8 @@ int r1_r3(int a[3][3]){
 }
 
 /*R2 interchange with R3 function*/
-int r2_r3(int a[3][3]){
-    int temp[3][3];
+int r2_r3(float a[3][3]){
+    float temp[3][3];
     int i,j,x;
 	for(i=1, x=2; i<=2 && x>0; i++, x--){
 		for(j=0; j<3; j++){
@@ -59,8 +59,9 @@ int r2_r3(int a[3][3]){
     return a[3][3];
 }
 
-int ech(int d[3][3]){
-    int i, j, b[3][3];
+int ech(float d[3][3]){
+    int i, j;
+    float b[3][3];
     /*Duplicate matrix*/
     for(i=0; i<3; i++){
         for(j=0; j<3; j++){
@@ -277,15 +278,16 @@ int ech(int d[3][3]){
 }
 
 void main(){
-    int a[3][3], d[3][3], i, j, w1, v, r, rk;
-    double det=0, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, p1, r1, s1, t1, u1, o, x1, x2, x3, a1=1, v1, v2, v3;
+    int i, j, r, w1, v;
+    float a[3][3], d[3][3];
+    double det=0, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, p1, r1, s1, t1, u1, o, x1, x2, x3, a1=1, v1, v2, v3, rk;
     printf("Enter the matrix elements:");
 
     /*Taking array as input from user*/
     for(i=0; i<3; i++){
         for(j=0; j<3; j++){
             printf("\n Enter the Array a[%d][%d]: ",i,j);
-            scanf("%d",&a[i][j]);
+            scanf("%f",&a[i][j]);
         }
     }
 
@@ -300,11 +302,12 @@ void main(){
     printf("\nThe entered matrix: \n");
     for(i=0; i<3; i++) {
         for(j=0; j<3; j++) {
-            printf(" %d ", a[i][j]);
+            printf(" %.6g ", a[i][j]);
         }
         printf("\n");
     }
 
+    /* Finding roots */
     b1=(-1)*(a[0][0]+a[1][1]+a[2][2]);
 
     c1=((a[1][1]*a[2][2])-(a[2][1]*a[1][2])) + ((a[0][0]*a[2][2])- (a[2][0]*a[0][2])) + ((a[0][0]*a[1][1])-(a[1][0]*a[0][1]));
@@ -397,7 +400,7 @@ void main(){
         printf("\nCharacteristics matrix:\n");
         for(i=0; i<3; i++){
             for(j=0; j<3; j++){
-                printf(" %d ", d[i][j]);
+                printf(" %.6g ", d[i][j]);
             }
             printf("\n");
         }
@@ -408,22 +411,22 @@ void main(){
         printf("\nEchelon form: \n");
         for(i=0; i<3; i++){
             for(j=0; j<3; j++){
-                printf(" %d ", d[i][j]);
+                printf(" %.6g ", d[i][j]);
             }
             printf("\n");
         }
 
         /* Finding Rank of echelon form */
         if(d[1][0]==0 && d[2][0]==0 && d[2][1]==0)
-            rk = 3;
+            rk = 3.0;
 
         if(d[1][0]==0 && d[2][0]==0 && d[2][1]==0 && d[2][2]==0)
-            rk = 2;
+            rk = 2.0;
 
         if(d[1][0]==0 && d[1][1]==0 && d[1][2]==0 && d[2][0]==0 && d[2][1]==0 && d[2][2]==0)
-            rk = 1;
+            rk = 1.0;
 
-        printf("\nThe rank for case %d: %d", r+1, rk);
+        printf("\nThe rank for case %d: %.6g", r+1, rk);
 
         /* For rank=3 */
         if(rk==3){
