@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include<math.h>
 
-/*R1 interchange with R2 function*/
+/*Function to interchange R1 with R2*/
 int r1_r2(float a[3][3]){
     float temp[3][3];
     int i,j,x;
@@ -20,7 +20,7 @@ int r1_r2(float a[3][3]){
     return a[3][3];
 }
 
-/*R1 interchange with R3 function*/
+/*Function to interchange R1 with R3*/
 int r1_r3(float a[3][3]){
     float temp[3][3];
     int i,j,x;
@@ -41,7 +41,7 @@ int r1_r3(float a[3][3]){
     return a[3][3];
 }
 
-/*R2 interchange with R3 function*/
+/*Function to interchange R2 with R3*/
 int r2_r3(float a[3][3]){
     float temp[3][3];
     int i,j,x;
@@ -59,9 +59,11 @@ int r2_r3(float a[3][3]){
     return a[3][3];
 }
 
+/*Function to convert given matrix to echelon form*/
 int ech(float d[3][3]){
     int i, j;
     float b[3][3];
+	
     /*Duplicate matrix*/
     for(i=0; i<3; i++){
         for(j=0; j<3; j++){
@@ -277,10 +279,12 @@ int ech(float d[3][3]){
     return d[3][3];
 }
 
+/*Main Function*/
 void main(){
     int i, j, r, w1, v;
     float a[3][3], d[3][3];
     double det=0, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, p1, r1, s1, t1, u1, o, x1, x2, x3, a1=1, v1, v2, v3, rk;
+	
     printf("Enter the matrix elements:");
 
     /*Taking array as input from user*/
@@ -298,7 +302,7 @@ void main(){
         }
     }
 
-    /* Display array contents */
+    /*Display array elements*/
     printf("\nThe entered matrix: \n");
     for(i=0; i<3; i++) {
         for(j=0; j<3; j++) {
@@ -307,12 +311,12 @@ void main(){
         printf("\n");
     }
 
-    /* Finding roots */
-    b1=(-1)*(a[0][0]+a[1][1]+a[2][2]);
+    /*Finding roots*/
+    b1=(double)((-1)*(a[0][0]+a[1][1]+a[2][2]));
 
-    c1=((a[1][1]*a[2][2])-(a[2][1]*a[1][2])) + ((a[0][0]*a[2][2])- (a[2][0]*a[0][2])) + ((a[0][0]*a[1][1])-(a[1][0]*a[0][1]));
+    c1=(double)(((a[1][1]*a[2][2])-(a[2][1]*a[1][2])) + ((a[0][0]*a[2][2])- (a[2][0]*a[0][2])) + ((a[0][0]*a[1][1])-(a[1][0]*a[0][1])));
 
-    det=a[0][0]*( (a[1][1]*a[2][2])-(a[2][1]*a[1][2])) - a[0][1]*((a[1][0]*a[2][2])- (a[2][0]*a[1][2])) + a[0][2]*((a[1][0]*a[2][1])-(a[2][0]*a[1][1]));
+    det=(double)(a[0][0]*( (a[1][1]*a[2][2])-(a[2][1]*a[1][2])) - a[0][1]*((a[1][0]*a[2][2])- (a[2][0]*a[1][2])) + a[0][2]*((a[1][0]*a[2][1])-(a[2][0]*a[1][1])));
 
     d1=(-1)*det;
 
@@ -364,10 +368,12 @@ void main(){
             x3=(s1-u1)*sqrt(3)/2;
             printf("\nEigen Values : %.6g,%.6g,%.6g", x1, x2, x3);
             break;
+		    
         case 2:
             x1=exp(log10(d1/a1)/log10(e1)/3)*(-1);
             printf("\nEigen values : %.6g", x1);
             break;
+		    
         case 3:
             x1=2*j1*cos(k1/3)-(b1/3*a1);
             x2=l1*(m1+n1)+p1;
@@ -375,6 +381,7 @@ void main(){
             printf("\nEigen Values : %.6g, %.6g, %.6g", x1, x2, x3);
             break;
     }
+	
     for(r=0; r<3; r++){
         if(r==0){
             v = x1;
@@ -387,8 +394,10 @@ void main(){
         if(r==2){
             v = x3;
         }
+	    
         printf("\n====================================================================\n");
         printf("\nCase %d: ƛ = %d \n", r+1,v);
+	    
         for(i=0; i<3; i++){
             for(j=0; j<3; j++){
                 if(i==j)
@@ -396,7 +405,7 @@ void main(){
             }
         }
 
-        /* Display array contents */
+        /*Display array elements*/
         printf("\nCharacteristics matrix:\n");
         for(i=0; i<3; i++){
             for(j=0; j<3; j++){
@@ -405,6 +414,7 @@ void main(){
             printf("\n");
         }
 
+	/*Pass matrix to echelon function*/
         ech(d);
 
         /* Display array contents */
